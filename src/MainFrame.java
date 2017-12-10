@@ -1,13 +1,11 @@
+import java.awt.*;
 import javax.swing.*;
 public class MainFrame extends JFrame {
 	Map m;
 	public MainFrame() {
-	setSize(1400,750);
-	m = new Map();
-	add(m);	
-	setFocusable(true);
+	setSize(800,600);
+	
+	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setVisible(true);
-	setResizable(false); 	//ล็อกตัวขยาย
-	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 }
