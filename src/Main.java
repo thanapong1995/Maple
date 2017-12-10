@@ -1,17 +1,11 @@
 import java.awt.*;
 import javax.swing.*;
-public class Main extends JFrame{
-	
-	public Main() {
-		setTitle("Maple");
-		setSize(1400, 750);
-	}
-	
+import java.awt.Event.*;
+public class Main {
+
 	public static void main(String[] args) {
-		JFrame f = new Main();
-		f.setSize(1400, 750);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
+		
+		MainFrame f = new MainFrame();
 		
 	}
 
