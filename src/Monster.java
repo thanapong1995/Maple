@@ -10,8 +10,10 @@ public class Monster extends character{
 	Image m2[];
 	int i=0;
 	int r;
+	
 	 public Monster() {
-		 r =  (Math.random() < 0.5) ? 0:MainFrame.width;//เขียนแบบสั้น
+		hpoint = 3;
+		r =  (Math.random() < 0.5) ? 0:MainFrame.width;//เขียนแบบสั้น
 		m2 = new Image[2];
 		m2[0] = new ImageIcon("src/M2.png").getImage();
 		m2[1] = new ImageIcon("src/M22.png").getImage();
@@ -52,5 +54,9 @@ public class Monster extends character{
 			});
 			t.setRepeats(false);
 			t.start();
+			hpoint--;
+			if(hpoint<=0) {
+				Map.monsters.remove(this);
+			}
 		}
 }

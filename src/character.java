@@ -4,6 +4,7 @@ public class character {
 	int x,y,width,height;
 	int i=1;
 	int direction  ;
+	int hpoint;
 	public character() {
 		x=50;
 		y=500;

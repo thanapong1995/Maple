@@ -11,7 +11,7 @@ public class Map extends JPanel implements KeyListener{
 	Timer timer;
 	Image i;
 	Hero h;
-	ArrayList<Monster> monsters;
+	static ArrayList<Monster> monsters;
 	
 	 Map() {
 		 

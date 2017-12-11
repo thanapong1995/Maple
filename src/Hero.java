@@ -6,6 +6,7 @@ import java.lang.reflect.Array;
 public class Hero extends character{
 	Image b[];
 	public Hero() {
+		hpoint =10;
 		b = new Image[4];
 		b[1] = new ImageIcon("src/B.png").getImage();
 		b[2] = new ImageIcon("src/C.png").getImage();
