@@ -7,18 +7,28 @@ import java.awt.event.KeyListener;
 
 public class Map extends JPanel implements KeyListener{
 	Timer timer;
-	Image m;
+	Image i;
 	Hero h;
+	Monster m;
 	
 	 Map() {
 		 
 		setLayout(null);
-		m=new ImageIcon("src/map.png").getImage();
-		h=new Hero();
+		i = new ImageIcon("src/map.png").getImage();
+		h = new Hero();
+//		for(int index = 0;index<3;index++) {
+			m = new Monster();
+//		}
 		timer = new Timer(33, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(h.getX()>m.getX()) {
+					m.moveR();
+				}else {
+					m.moveL();
+				}
+					
 				repaint();
 				
 			}
@@ -28,8 +38,9 @@ public class Map extends JPanel implements KeyListener{
 	}
 	 protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(m, 0, 0, getWidth(), getHeight(), null);
+		g.drawImage(i, 0, 0, getWidth(), getHeight(), null);
 		h.draw(g);
+		m.draw(g);
 		
 	}
 	@Override

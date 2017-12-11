@@ -3,21 +3,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
-public class Hero {
+public class Hero extends character{
 	Image b[];
-	int x,y,width,height;
-	int i=1;
-	int direction  ;
 	public Hero() {
 		b = new Image[4];
 		b[1] = new ImageIcon("src/B.png").getImage();
 		b[2] = new ImageIcon("src/C.png").getImage();
 		b[3] = new ImageIcon("src/F.png").getImage();
 		b[0] = new ImageIcon("src/A.png").getImage();
-		x=50;
-		y=500;
-		width=100;
-		height=120;
 	}
 	void moveR() {
 		direction =1;
@@ -25,6 +18,9 @@ public class Hero {
 		i++;
 		if(i>3 )i=1;
 		
+	}
+	int getX() {
+		return this.x;
 	}
 	void moveL() {
 		direction =0;
@@ -52,9 +48,4 @@ public class Hero {
 			g.drawImage(b[i],x+width,y, -width, height, null);
 		}
 	}
-	
-	
-	
-		
-	
 }

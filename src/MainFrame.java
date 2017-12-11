@@ -1,20 +1,20 @@
 import java.awt.*;
 import javax.swing.*;
 public class MainFrame extends JFrame {
-	Map m;
-	Hero b;
+	Map i;
+	static int width = 1400;
 	public MainFrame() {
 	
-	m = new Map();
+	i = new Map();
 
-	add(m);
-	
-	setSize(1400,750);
+	add(i);
+	setSize(width,750);
 //	setFocusable(true);
 	setVisible(true);
 	setLocationRelativeTo(null);
 	setResizable(false); 	//ÅçÍ¡µÑÇ¢ÂÒÂ
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
-	m.requestFocusInWindow();//â¿¡ÑÊ¨Í
+	i.requestFocusInWindow();//â¿¡ÑÊ¨Í
 	}
+	
 }
