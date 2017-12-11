@@ -10,10 +10,11 @@ public class MainFrame extends JFrame {
 	add(m);
 	
 	setSize(1400,750);
-	setFocusable(true);
+//	setFocusable(true);
 	setVisible(true);
 	setLocationRelativeTo(null);
 	setResizable(false); 	//ล็อกตัวขยาย
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
+	m.requestFocusInWindow();//โฟกัสจอ
 	}
 }
