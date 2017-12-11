@@ -9,7 +9,6 @@ public class Monster extends character{
 	int r;
 	 public Monster() {
 		 r =  (Math.random() < 0.5) ? 0:MainFrame.width;//เขียนแบบสั้น
-		 System.out.println(MainFrame.width);
 		m2 = new Image[2];
 		m2[0] = new ImageIcon("src/M2.png").getImage();
 		m2[1] = new ImageIcon("src/M22.png").getImage();
