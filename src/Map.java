@@ -62,8 +62,27 @@ public class Map extends JPanel implements KeyListener{
 			
 		}
 		if(e.getKeyCode()== e.VK_Z) {
+			checkHit();
 			h.hit();
 		}
+	}
+	private void checkHit() {
+		for(int index=0;index<monsters.size();index++) {
+			if(h.direction==0) {
+				if(monsters.get(index).x>h.x-50 && monsters.get(index).x<h.x+20) {
+					hitting(monsters.get(index));
+				}
+			}
+			else {
+				if(monsters.get(index).x>h.x-20 && monsters.get(index).x<h.x+100) {
+					hitting(monsters.get(index));
+				}
+			}
+		}
+	}
+	private void hitting(Monster monster) {
+		monster.wasHit();
+		
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {

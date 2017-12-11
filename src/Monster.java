@@ -1,7 +1,10 @@
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 public class Monster extends character{
 	Image m2[];
@@ -36,5 +39,18 @@ public class Monster extends character{
 			}else{
 				g.drawImage(m2[i],x+width,y, -width, height, null);
 			}
+		}
+	 void wasHit() {
+		 i=1;
+			Timer t=new Timer(200, new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					i=0;
+					
+				}
+			});
+			t.setRepeats(false);
+			t.start();
 		}
 }
