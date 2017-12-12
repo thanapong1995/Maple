@@ -7,12 +7,13 @@ public class Hero extends character{
 	Image b[];
 	public Hero() {
 		hpoint =10;
-		b = new Image[4];
+		b = new Image[5];
 		b[1] = new ImageIcon("src/B.png").getImage();
 		b[2] = new ImageIcon("src/C.png").getImage();
 		b[3] = new ImageIcon("src/F.png").getImage();
-		b[0] = new ImageIcon("src/A.png").getImage();
-	}
+		b[0] = new ImageIcon("src/hitmonster.png").getImage();//ÃÙ»µÕ
+		b[4] = new ImageIcon("src/hithero.png").getImage();//ÃÙ»â´¹ÁÍ¹µÕ
+		}
 	void moveR() {
 		direction =1;
 		x+=10;
@@ -29,8 +30,21 @@ public class Hero extends character{
 		i++;
 		if(i>3)i=1;
 	}
-	void hit() {
+	void hitmonster() {
 		i=0;
+		Timer t=new Timer(200, new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				i=1;
+				
+			}
+		});
+		t.setRepeats(false);
+		t.start();
+	}
+	void hithero() {
+		i=4;
 		Timer t=new Timer(200, new ActionListener() {
 			
 			@Override

@@ -8,7 +8,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Map extends JPanel implements KeyListener{
-	Timer timer;
+	Timer timer1;
+	Timer timer2;
 	Image i;
 	Hero h;
 	static ArrayList<Monster> monsters;
@@ -19,10 +20,23 @@ public class Map extends JPanel implements KeyListener{
 		i = new ImageIcon("src/map.png").getImage();
 		h = new Hero();
 		monsters = new ArrayList<Monster>();
-		for(int index = 0;index<3;index++) {
-			monsters.add(new Monster());
-		}
-		timer = new Timer(33, new ActionListener() {
+		
+		timer1 = new Timer(7000, new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for(int index = 0;index<10;index++) {
+					monsters.add(new Monster());
+				}
+				repaint();
+			}
+		});
+		timer1.start();
+		
+//		for(int index = 0;index<10;index++) {
+//			monsters.add(new Monster());
+//		}
+		timer2 = new Timer(33, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -30,16 +44,17 @@ public class Map extends JPanel implements KeyListener{
 				Monster m = monsters.get(index);
 					if(h.getX()>m.getX()) {
 					m.moveR();
-				}else {
+				}else if(h.getX()+55<m.getX()){
 					m.moveL();
 				}
+					;
 			}
 					
 				repaint();
 				
 			}
 		} );
-		timer.start();
+		timer2.start();
 		addKeyListener(this);
 	}
 	 protected void paintComponent(Graphics g) {
@@ -63,7 +78,7 @@ public class Map extends JPanel implements KeyListener{
 		}
 		if(e.getKeyCode()== e.VK_Z) {
 			checkHit();
-			h.hit();
+			h.hitmonster();
 		}
 	}
 	private void checkHit() {
