@@ -12,7 +12,7 @@ public class Monster extends character{
 	int r;
 	
 	 public Monster() {
-		hpoint = 3;
+		hpoint = 2;
 		r =  (Math.random() < 0.5) ? 0:MainFrame.width;//เขียนแบบสั้น
 		m2 = new Image[2];
 		m2[0] = new ImageIcon("src/M2.png").getImage();

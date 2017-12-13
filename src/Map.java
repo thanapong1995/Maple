@@ -12,6 +12,7 @@ public class Map extends JPanel implements KeyListener{
 	Timer timer2;
 	Image i;
 	Hero h;
+	int n;
 	static ArrayList<Monster> monsters;
 	
 	 Map() {
@@ -19,14 +20,18 @@ public class Map extends JPanel implements KeyListener{
 		setLayout(null);
 		i = new ImageIcon("src/map.png").getImage();
 		h = new Hero();
+		n=0;
 		monsters = new ArrayList<Monster>();
 		
-		timer1 = new Timer(7000, new ActionListener() {
+		timer1 = new Timer(2000, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				for(int index = 0;index<10;index++) {
+				if(n==20) {
+					timer1.stop();
+				}else {
 					monsters.add(new Monster());
+					n++;
 				}
 				repaint();
 			}
@@ -84,12 +89,12 @@ public class Map extends JPanel implements KeyListener{
 	private void checkHit() {
 		for(int index=0;index<monsters.size();index++) {
 			if(h.direction==0) {
-				if(monsters.get(index).x>h.x-50 && monsters.get(index).x<h.x+20) {
+				if(monsters.get(index).x>h.x-50 && monsters.get(index).x<h.x+10) {
 					hitting(monsters.get(index));
 				}
 			}
 			else {
-				if(monsters.get(index).x>h.x-20 && monsters.get(index).x<h.x+100) {
+				if(monsters.get(index).x>h.x-10 && monsters.get(index).x<h.x+100) {
 					hitting(monsters.get(index));
 				}
 			}
