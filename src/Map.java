@@ -12,6 +12,7 @@ public class Map extends JPanel implements KeyListener{
 	Timer timer2;
 	Image i;
 	Hero h;
+	over o;
 	int n;
 	static ArrayList<Monster> monsters;
 	static ArrayList<Item> items;
@@ -21,6 +22,7 @@ public class Map extends JPanel implements KeyListener{
 		setLayout(null);
 		i = new ImageIcon("src/map.png").getImage();
 		h = new Hero();
+		o = new over();
 		n=0;
 		monsters = new ArrayList<Monster>();
 		items = new ArrayList<Item>();
@@ -53,6 +55,7 @@ public class Map extends JPanel implements KeyListener{
 					}
 				}
 				checkMonsterHit();
+
 				repaint();
 			}
 		} );
@@ -68,6 +71,9 @@ public class Map extends JPanel implements KeyListener{
 		}
 		for(int index = 0;index<items.size();index++) {
 			items.get(index).draw(g);
+		}
+		if(h.hpoint<=0) {
+			o.draw(g);
 		}
 		
 	}
@@ -88,7 +94,7 @@ public class Map extends JPanel implements KeyListener{
 			h.heroHitMonster();
 		}
 	}
-	 void checkHeroHit() {
+	 void checkHeroHit() {//àªç¤ÎÕâÃèµÕÁÍ¹â´¹äËÁ
 		for(int index=0;index<monsters.size();index++) {
 			if(h.direction==0) {
 				if(monsters.get(index).x>h.x-50 && monsters.get(index).x<h.x+20) {
@@ -103,25 +109,25 @@ public class Map extends JPanel implements KeyListener{
 		}
 	}
 	
-	  void checkMonsterHit() {
+	  void checkMonsterHit() {//àªç¤ÁÍ¹àµÍÃìà´Ô¹¼èÒ¹
 		for(int index=0;index<monsters.size();index++) {
 			if(h.direction==0) {
 				if(monsters.get(index).x>h.x-10 && monsters.get(index).x<h.x+20) {
-					System.out.println(h.chack);
+					//System.out.println(h.chack);
 					monsterHit();
 					
 				}
 			}
 			else {
 				if(monsters.get(index).x>h.x-20 && monsters.get(index).x<h.x+70) {
-					System.out.println(h.chack);
+					//System.out.println(h.chack);
 					monsterHit();
 				}
 			}
 		}
 	}
 	
-	 void checkhp() {
+	 void checkhp() {//àªç¤à¡çºHP
 		for(int index=0;index<items.size();index++) {
 			if(h.direction==0) {
 				if(items.get(index).x>h.x-50 && items.get(index).x<h.x+10) {
@@ -143,11 +149,7 @@ public class Map extends JPanel implements KeyListener{
 			item.wasHp();
 	}
 	  void monsterHit() {
-		  if(h.chack==true) {
 			  h.monsterHitHero();
-			  Hero.hpoint--;
-			  System.out.println(Hero.hpoint);
-		  }
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {

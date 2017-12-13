@@ -42,7 +42,7 @@ public class Monster extends character{
 				g.drawImage(m2[i],x+width,y, -width, height, null);
 			}
 		}
-	 void wasHit() {
+	 void wasHit() {//มอนเตอร์โดนตี
 		 i=1;
 			Timer t=new Timer(200, new ActionListener() {
 				

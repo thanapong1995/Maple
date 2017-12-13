@@ -11,7 +11,6 @@ public class Item extends character{
 	int r;
 	
 	public Item(int x,int y) {
-		//r =  (Math.random() < 0.5) ? 0:MainFrame.width;
 		i = new ImageIcon("src/Ba.png").getImage();
 		this.x=x;
 		this.y=y-15;

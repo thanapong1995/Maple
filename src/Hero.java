@@ -3,20 +3,24 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
+
 public class Hero extends character{
 	Image b[];
 	static int hpoint;
-	static boolean chack = true;
+	static boolean chack;
+	Timer t1;
+	Timer t2;
 	public Hero() {
 
 		hpoint =10;
-		b = new Image[5];
+		b = new Image[6];
 		b[0] = new ImageIcon("src/B.png").getImage();
 		b[1] = new ImageIcon("src/C.png").getImage();
 		b[2] = new ImageIcon("src/F.png").getImage();
 		b[3] = new ImageIcon("src/hitmonster.png").getImage();//√Ÿªµ’
 		b[4] = new ImageIcon("src/hithero.png").getImage();//√Ÿª‚¥π¡Õπµ’
-		}
+		b[5] = new ImageIcon("src/die.png").getImage();
+	}
 	
 	void moveR() {
 		direction =1;
@@ -37,9 +41,9 @@ public class Hero extends character{
 		if(i>2)i=0;
 	}
 	
-	void heroHitMonster() {
+	void heroHitMonster() {//Œ’‚√Ëµ’
 		i=3;
-		Timer t1=new Timer(200, new ActionListener() {
+		t1=new Timer(200, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -51,18 +55,27 @@ public class Hero extends character{
 		t1.start();
 	}
 	
-	void monsterHitHero() {
+	void monsterHitHero() {//¡Õπ‡µÕ√Ï‚¥πµ’
 		i=4;
-		Timer t2=new Timer(200, new ActionListener() {
+		chack = false;
+		t2=new Timer(200, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				i=0;
-				chack = false;
+				chack = true;
 			}
 		});
 		t2.setRepeats(false);
 		t2.start();
+		
+		if(chack = true) {
+			hpoint--;
+		}
+		if(hpoint<=0) {
+			i=5;
+		}
+		System.out.println(hpoint);
 	}
 	
 	
