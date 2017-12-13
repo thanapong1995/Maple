@@ -14,6 +14,7 @@ public class Map extends JPanel implements KeyListener{
 	Hero h;
 	int n;
 	static ArrayList<Monster> monsters;
+	static ArrayList<Item> items;
 	
 	 Map() {
 		 
@@ -22,6 +23,7 @@ public class Map extends JPanel implements KeyListener{
 		h = new Hero();
 		n=0;
 		monsters = new ArrayList<Monster>();
+		items = new ArrayList<Item>();
 		
 		timer1 = new Timer(2000, new ActionListener() {
 			
@@ -33,30 +35,25 @@ public class Map extends JPanel implements KeyListener{
 					monsters.add(new Monster());
 					n++;
 				}
-				repaint();
 			}
 		});
 		timer1.start();
+
 		
-//		for(int index = 0;index<10;index++) {
-//			monsters.add(new Monster());
-//		}
 		timer2 = new Timer(33, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for(int index = 0;index<monsters.size();index++) {
 				Monster m = monsters.get(index);
-					if(h.getX()>m.getX()) {
-					m.moveR();
-				}else if(h.getX()+55<m.getX()){
-					m.moveL();
+					if(h.getX()>m.getX()) {	
+						m.moveR();
+					}else if(h.getX()+55<m.getX()){
+						m.moveL();
+					}
 				}
-					;
-			}
-					
+				checkHitmonster();
 				repaint();
-				
 			}
 		} );
 		timer2.start();
@@ -69,15 +66,20 @@ public class Map extends JPanel implements KeyListener{
 		for(int index = 0;index<monsters.size();index++) {
 			monsters.get(index).draw(g);
 		}
+		for(int index = 0;index<items.size();index++) {
+			items.get(index).draw(g);
+		}
 		
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == e.VK_RIGHT){
+			checkhp();
 			h.moveR();
 			
 		}
 		if(e.getKeyCode()== e.VK_LEFT) {
+			checkhp();
 			h.moveL();
 			
 		}
@@ -90,19 +92,56 @@ public class Map extends JPanel implements KeyListener{
 		for(int index=0;index<monsters.size();index++) {
 			if(h.direction==0) {
 				if(monsters.get(index).x>h.x-50 && monsters.get(index).x<h.x+10) {
-					hitting(monsters.get(index));
+					herohit(monsters.get(index));
 				}
 			}
 			else {
 				if(monsters.get(index).x>h.x-10 && monsters.get(index).x<h.x+100) {
-					hitting(monsters.get(index));
+					herohit(monsters.get(index));
 				}
 			}
 		}
 	}
-	private void hitting(Monster monster) {
+	
+	private void checkHitmonster() {
+		for(int index=0;index<monsters.size();index++) {
+			if(h.direction==0) {
+				if(monsters.get(index).x>h.x && monsters.get(index).x<h.x+20) {
+					monsterHit();
+				}
+			}
+			else {
+				if(monsters.get(index).x>h.x-20 && monsters.get(index).x<h.x+70) {
+					monsterHit();
+				}
+			}
+		}
+	}
+	
+	private void checkhp() {
+		for(int index=0;index<items.size();index++) {
+			if(h.direction==0) {
+				if(items.get(index).x>h.x-50 && items.get(index).x<h.x+10) {
+					itemhp(items.get(index));
+				}
+			}
+			else {
+				if(items.get(index).x>h.x-10 && items.get(index).x<h.x+100) {
+					itemhp(items.get(index));
+				}
+			}
+		}
+	}
+	private void herohit(Monster monster) {
 		monster.wasHit();
 		
+	}
+	private	void itemhp(Item item) {
+			item.wasHp();
+	}
+	private void monsterHit() {
+		Hero.hpoint--;
+		System.out.println(Hero.hpoint);
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -115,4 +154,3 @@ public class Map extends JPanel implements KeyListener{
 		
 	}
 }
-

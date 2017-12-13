@@ -10,6 +10,7 @@ public class Monster extends character{
 	Image m2[];
 	int i=0;
 	int r;
+	double random;
 	
 	 public Monster() {
 		hpoint = 2;
@@ -57,6 +58,10 @@ public class Monster extends character{
 			hpoint--;
 			if(hpoint<=0) {
 				Map.monsters.remove(this);
+				random = Math.random()*10;
+			if (random > 7)
+				Map.items.add(new Item(this.x,this.y));
+				
 			}
 		}
 }

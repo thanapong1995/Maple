@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 public class Hero extends character{
 	Image b[];
+	static int hpoint;
 	public Hero() {
 		hpoint =10;
 		b = new Image[5];

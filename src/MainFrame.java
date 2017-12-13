@@ -9,7 +9,6 @@ public class MainFrame extends JFrame {
 
 	add(i);
 	setSize(width,750);
-//	setFocusable(true);
 	setVisible(true);
 	setLocationRelativeTo(null);
 	setResizable(false); 	//ล็อกตัวขยาย
