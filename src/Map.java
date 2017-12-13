@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class Map extends JPanel implements KeyListener{
 	Timer timer1;
 	Timer timer2;
-	Timer timer3;
 	Image i;
 	Hero h;
 	int n;
@@ -53,25 +52,11 @@ public class Map extends JPanel implements KeyListener{
 						m.moveL();
 					}
 				}
+				checkMonsterHit();
 				repaint();
 			}
 		} );
 		timer2.start();
-		timer3 = new Timer(33, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(checkMonsterHit()) {
-					try {
-						Thread.sleep(1000);
-					}catch(Exception e1) {
-						System.out.println(e1);
-					}
-				}
-				repaint();
-			}
-		} );
-		timer3.start();
-		
 		addKeyListener(this);
 	}
 	 protected void paintComponent(Graphics g) {
@@ -118,24 +103,22 @@ public class Map extends JPanel implements KeyListener{
 		}
 	}
 	
-	  boolean checkMonsterHit() {
+	  void checkMonsterHit() {
 		for(int index=0;index<monsters.size();index++) {
 			if(h.direction==0) {
 				if(monsters.get(index).x>h.x-10 && monsters.get(index).x<h.x+20) {
 					System.out.println(h.chack);
 					monsterHit();
-					return true;
+					
 				}
 			}
 			else {
 				if(monsters.get(index).x>h.x-20 && monsters.get(index).x<h.x+70) {
 					System.out.println(h.chack);
 					monsterHit();
-					return true;
 				}
 			}
 		}
-		return false;
 	}
 	
 	 void checkhp() {
