@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Map extends JPanel implements KeyListener{
 	Timer timer1;
 	Timer timer2;
+	Timer timer3;
 	Image i;
 	Hero h;
 	int n;
@@ -52,11 +53,25 @@ public class Map extends JPanel implements KeyListener{
 						m.moveL();
 					}
 				}
-				checkHitmonster();
 				repaint();
 			}
 		} );
 		timer2.start();
+		timer3 = new Timer(33, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(checkMonsterHit()) {
+					try {
+						Thread.sleep(1000);
+					}catch(Exception e1) {
+						System.out.println(e1);
+					}
+				}
+				repaint();
+			}
+		} );
+		timer3.start();
+		
 		addKeyListener(this);
 	}
 	 protected void paintComponent(Graphics g) {
@@ -84,41 +99,46 @@ public class Map extends JPanel implements KeyListener{
 			
 		}
 		if(e.getKeyCode()== e.VK_Z) {
-			checkHit();
-			h.hitmonster();
+			checkHeroHit();
+			h.heroHitMonster();
 		}
 	}
-	private void checkHit() {
+	 void checkHeroHit() {
 		for(int index=0;index<monsters.size();index++) {
 			if(h.direction==0) {
-				if(monsters.get(index).x>h.x-50 && monsters.get(index).x<h.x+10) {
+				if(monsters.get(index).x>h.x-50 && monsters.get(index).x<h.x+20) {
 					herohit(monsters.get(index));
 				}
 			}
 			else {
-				if(monsters.get(index).x>h.x-10 && monsters.get(index).x<h.x+100) {
+				if(monsters.get(index).x>h.x-20 && monsters.get(index).x<h.x+100) {
 					herohit(monsters.get(index));
 				}
 			}
 		}
 	}
 	
-	private void checkHitmonster() {
+	  boolean checkMonsterHit() {
 		for(int index=0;index<monsters.size();index++) {
 			if(h.direction==0) {
-				if(monsters.get(index).x>h.x && monsters.get(index).x<h.x+20) {
+				if(monsters.get(index).x>h.x-10 && monsters.get(index).x<h.x+20) {
+					System.out.println(h.chack);
 					monsterHit();
+					return true;
 				}
 			}
 			else {
 				if(monsters.get(index).x>h.x-20 && monsters.get(index).x<h.x+70) {
+					System.out.println(h.chack);
 					monsterHit();
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 	
-	private void checkhp() {
+	 void checkhp() {
 		for(int index=0;index<items.size();index++) {
 			if(h.direction==0) {
 				if(items.get(index).x>h.x-50 && items.get(index).x<h.x+10) {
@@ -132,16 +152,19 @@ public class Map extends JPanel implements KeyListener{
 			}
 		}
 	}
-	private void herohit(Monster monster) {
+	 void herohit(Monster monster) {
 		monster.wasHit();
 		
 	}
-	private	void itemhp(Item item) {
+	void itemhp(Item item) {
 			item.wasHp();
 	}
-	private void monsterHit() {
-		Hero.hpoint--;
-		System.out.println(Hero.hpoint);
+	  void monsterHit() {
+		  if(h.chack==true) {
+			  h.monsterHitHero();
+			  Hero.hpoint--;
+			  System.out.println(Hero.hpoint);
+		  }
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {

@@ -2,7 +2,7 @@ import java.awt.Image;
 
 public class character {
 	int x,y,width,height;
-	int i=1;
+	int i=0;
 	int direction  ;
 	int hpoint;
 	public character() {

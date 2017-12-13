@@ -8,7 +8,6 @@ import javax.swing.Timer;
 
 public class Monster extends character{
 	Image m2[];
-	int i=0;
 	int r;
 	double random;
 	
