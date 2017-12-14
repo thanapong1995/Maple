@@ -6,23 +6,22 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
-public class Monster extends character{
-	Image m2[];
+public class Bossmonster extends character{
 	int r;
 	double random;
 	Timer t;
-
-	 public Monster() {
-		hpoint = 2;
+	Image boss[];
+	 public Bossmonster() {
+		hpoint = 5;
 		r =  (Math.random() < 0.5) ? 0:MainFrame.width;//เขียนแบบสั้น
-		m2 = new Image[2];
-		m2[0] = new ImageIcon("src/M2.png").getImage();
-		m2[1] = new ImageIcon("src/M22.png").getImage();
-		
+		boss = new Image[2];
+		boss[0] = new ImageIcon("src/boss1.png").getImage();
+		boss[1] = new ImageIcon("src/boss2.png").getImage();
+	
 		this.x=r;
-		y = 570;
-		width = 50;
-		height = 35;
+		y = 375;
+		width = 250;
+		height = 250;
 		
 	}
 	 void moveR() {
@@ -39,12 +38,12 @@ public class Monster extends character{
 		}
 	 void draw(Graphics g) {
 			if(direction == 0) {
-				g.drawImage(m2[i],x, y, width, height, null);
+				g.drawImage(boss[i],x, y, width, height, null);
 			}else{
-				g.drawImage(m2[i],x+width,y, -width, height, null);
+				g.drawImage(boss[i],x+width,y, -width, height, null);
 			}
 		}
-
+	 
 	 void wasHit() {//มอนเตอร์โดนตี
 		 i=1;
 			t=new Timer(200, new ActionListener() {
@@ -58,12 +57,5 @@ public class Monster extends character{
 			t.setRepeats(false);
 			t.start();
 			hpoint--;
-			if(hpoint<=0) {
-				Map.monsters.remove(this);
-				random = Math.random()*10;
-			if (random > 7)
-				Map.items.add(new Item(this.x,this.y));
-				
-			}
 		}
 }

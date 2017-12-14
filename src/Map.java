@@ -11,9 +11,12 @@ public class Map extends JPanel implements KeyListener{
 	Timer timer1;
 	Timer timer2;
 	Image i;
+	Image start;
 	Hero h;
-	over o;
+	Over o;
+	Bossmonster boss;
 	int n;
+	int s;
 	static ArrayList<Monster> monsters;
 	static ArrayList<Item> items;
 	
@@ -22,7 +25,8 @@ public class Map extends JPanel implements KeyListener{
 		setLayout(null);
 		i = new ImageIcon("src/map.png").getImage();
 		h = new Hero();
-		o = new over();
+		o = new Over();
+		boss = new Bossmonster();
 		n=0;
 		monsters = new ArrayList<Monster>();
 		items = new ArrayList<Item>();
@@ -33,14 +37,16 @@ public class Map extends JPanel implements KeyListener{
 			public void actionPerformed(ActionEvent e) {
 				if(n==20) {
 					timer1.stop();
+					
 				}else {
 					monsters.add(new Monster());
 					n++;
 				}
+				checkMonsterHit();
 			}
 		});
 		timer1.start();
-
+		
 		
 		timer2 = new Timer(33, new ActionListener() {
 			
@@ -48,15 +54,28 @@ public class Map extends JPanel implements KeyListener{
 			public void actionPerformed(ActionEvent e) {
 				for(int index = 0;index<monsters.size();index++) {
 				Monster m = monsters.get(index);
-					if(h.getX()>m.getX()) {	
+					if(h.getX()>m.getX()) {
 						m.moveR();
 					}else if(h.getX()+55<m.getX()){
 						m.moveL();
 					}
 				}
-				checkMonsterHit();
-
+//				if(h.getX()-220>boss.getX()) {
+//					boss.moveR();
+//				}
+//				else if(h.getX()+60<boss.getX()){
+//					boss.moveL();
+//				}
+				
 				repaint();
+				
+				if(h.hpoint<=0 || boss.hpoint<=0) {
+					timer2.stop();
+					timer1.stop();
+					//for(int index = 0;index<monsters.size();index++) {
+						//monsters.get(index).stopThread();
+					//}
+				}
 			}
 		} );
 		timer2.start();
@@ -72,7 +91,11 @@ public class Map extends JPanel implements KeyListener{
 		for(int index = 0;index<items.size();index++) {
 			items.get(index).draw(g);
 		}
-		if(h.hpoint<=0) {
+//		if(n==20) {
+//			boss.draw(g);
+//		}
+		if(h.hpoint<=0 || boss.hpoint<=0) {
+			
 			o.draw(g);
 		}
 		
@@ -107,20 +130,27 @@ public class Map extends JPanel implements KeyListener{
 				}
 			}
 		}
+//		if(h.direction==0) {
+//			if(boss.getX()>h.x-220 && boss.getX()<h.x+20) {
+//				
+//			}
+//		}else {if(boss.getX()>h.x-20 && boss.getX()<h.x+100) {
+//			
+//		}
+//			
+//		}
 	}
 	
 	  void checkMonsterHit() {//เช็คมอนเตอร์เดินผ่าน
 		for(int index=0;index<monsters.size();index++) {
 			if(h.direction==0) {
 				if(monsters.get(index).x>h.x-10 && monsters.get(index).x<h.x+20) {
-					//System.out.println(h.chack);
 					monsterHit();
 					
 				}
 			}
 			else {
 				if(monsters.get(index).x>h.x-20 && monsters.get(index).x<h.x+70) {
-					//System.out.println(h.chack);
 					monsterHit();
 				}
 			}
@@ -143,6 +173,7 @@ public class Map extends JPanel implements KeyListener{
 	}
 	 void herohit(Monster monster) {
 		monster.wasHit();
+		
 		
 	}
 	void itemhp(Item item) {
